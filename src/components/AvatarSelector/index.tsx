@@ -2,8 +2,10 @@ import * as React from 'react';
 import {Name} from "../Name";
 import styled from '@emotion/styled/macro';
 import {Container} from "@material-ui/core";
-import {Icon} from "../Icon";
-
+import {IconNames} from "../Icon";
+import {Avatar} from "../Avatar";
+import {getValuesFromEnum} from "../../utils";
+import {AvatarList} from "../AvatarList";
 
 
 const FormContainer = styled.div`
@@ -11,15 +13,14 @@ const FormContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const AvatarSelector: React.FC = () => {
-
   return (
     <>
      <Container>
        <FormContainer>
-         <Icon name={'spiderMan'} />
-         <Name name={'dan'} />
+         {/*<Avatar id={IconNames.WINTER_SOLDIER} />*/}
+         {/*<Name name={'dan'} />*/}
+         <AvatarList />
        </FormContainer>
      </Container>
     </>

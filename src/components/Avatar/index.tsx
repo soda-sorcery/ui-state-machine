@@ -1,13 +1,17 @@
 import * as React from 'react';
-
+import {Icon, IconNames} from "../Icon";
+import {css, jsx} from "@emotion/core";
+/** @jsx jsx */
 
 interface AvatarProps {
-    img: string;
+    name: IconNames
 }
 
-const Avatar: React.FC<AvatarProps> = ({img}) => {
+const Avatar: React.FC<AvatarProps> = ({name}) => {
     return (
-        <img src={img} />
+     <article id={name} css={css`cursor: pointer;`}>
+         <Icon name={name} />
+     </article>
     )
 };
 
