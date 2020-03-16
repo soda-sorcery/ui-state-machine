@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {Name} from "../Name";
 import styled from '@emotion/styled/macro';
-import {AppBar, Card, Collapse, Container, Fade, Grow, Paper, Slide, Zoom} from "@material-ui/core";
+import {AppBar, Container,Paper, Slide} from "@material-ui/core";
 import {IconNames} from "../Icon";
 import {Avatar} from "../Avatar";
-import {getValuesFromEnum} from "../../utils";
 import { AvatarList } from "../AvatarList";
 import {useState} from "react";
-import {css, jsx} from "@emotion/core";
 import './index.css'
 
 const FormContainer = styled.div`
