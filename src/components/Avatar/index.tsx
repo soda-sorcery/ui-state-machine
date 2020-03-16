@@ -5,11 +5,12 @@ import {css, jsx} from "@emotion/core";
 
 interface AvatarProps {
     name: IconNames
+    onClick?: (event: any) => void;
 }
 
-const Avatar: React.FC<AvatarProps> = ({name}) => {
+const Avatar: React.FC<AvatarProps> = ({name, onClick}) => {
     return (
-     <article id={name} css={css`cursor: pointer;`}>
+     <article onClick={onClick} id={name} css={css`cursor: pointer;`}>
          <Icon name={name} />
      </article>
     )

@@ -28,12 +28,12 @@ const Name: React.FC<NameProps> = ({name}) => {
         margin-left: 20px;
       `}>
         {!isClicked &&
-          <Typography css={css`margin-top: 40px; cursor: pointer;`} variant={"h4"}>
+          <Typography css={css`margin-top: 37px; cursor: pointer;`} variant={"h4"}>
               <span onClick={clickHandler}>{formName}</span>
           </Typography>
         }
         {isClicked &&
-          <TextField css={css`margin-top: 32px;`} onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+          <TextField autoFocus={true} css={css`margin-top: 18px;`} onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
         }
       </div>
     )

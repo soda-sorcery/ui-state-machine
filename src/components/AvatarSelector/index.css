@@ -1,0 +1,10 @@
+header.avatar-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 10px 0 10px 20px;
+}
+
+.avatar-selection-list {
+  margin-top: 40px;
+}
