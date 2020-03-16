@@ -4,7 +4,6 @@ import {getValuesFromEnum} from "../../utils";
 import {Avatar} from "../Avatar";
 import {css, jsx} from "@emotion/core";
 import { Card } from '@material-ui/core'
-import {forwardRef} from "react";
 /** @jsx jsx */
 
 const avatars = getValuesFromEnum(IconNames);
