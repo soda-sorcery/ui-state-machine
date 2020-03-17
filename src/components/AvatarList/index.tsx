@@ -8,12 +8,8 @@ import { Card } from '@material-ui/core'
 
 const avatars = getValuesFromEnum(IconNames);
 
-const handler = function (event: any){
-  console.log('event', event.target.id);
-};
-
 export interface AvatarListProps {
-  ref?: any;
+  avatarSelectorHandler: (event: any) => void;
 }
 
 const avatarMap = avatars.map((m) => {
@@ -24,10 +20,10 @@ const avatarMap = avatars.map((m) => {
   );
 });
 
-const AvatarList: React.FC<AvatarListProps> = () => {
+const AvatarList: React.FC<AvatarListProps> = ({avatarSelectorHandler}) => {
   return (
    <Card>
-     <ul onClick={handler} css={css`display: flex; width: 75%; list-style: none; flex-wrap: wrap; margin-top: 37px;`}>
+     <ul onClick={avatarSelectorHandler} css={css`display: flex; width: 75%; list-style: none; flex-wrap: wrap; margin-top: 37px;`}>
        {avatarMap}
      </ul>
    </Card>
