@@ -6,11 +6,13 @@ import {css, jsx} from "@emotion/core";
 interface AvatarProps {
     name: IconNames
     onClick?: (event: any) => void;
+    onBlur?: (event: any) => void;
 }
 
-const Avatar: React.FC<AvatarProps> = ({name, onClick}) => {
+const Avatar: React.FC<AvatarProps> = ({name, onClick, onBlur}) => {
+
     return (
-     <article onClick={onClick} id={name} css={css`cursor: pointer;`}>
+     <article onBlur={onBlur} onClick={onClick} id={name} css={css`cursor: pointer; background-color: #fff; border-radius: 50%;`}>
          <Icon name={name} />
      </article>
     )

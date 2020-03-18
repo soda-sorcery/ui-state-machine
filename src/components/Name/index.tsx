@@ -3,7 +3,7 @@ import {TextField} from "@material-ui/core";
 import {useState} from "react";
 import { css, jsx } from '@emotion/core';
 import { Typography } from "@material-ui/core";
-
+import './index.css'
 /** @jsx jsx */
 
 interface NameProps {
@@ -33,7 +33,7 @@ const Name: React.FC<NameProps> = ({name}) => {
           </Typography>
         }
         {isClicked &&
-          <TextField autoFocus={true} css={css`margin-top: 18px;`} onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+          <TextField autoFocus css={css`margin-top: 18px;`} onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
         }
       </div>
     )
