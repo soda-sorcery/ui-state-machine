@@ -7,6 +7,9 @@ import {Avatar} from "../Avatar";
 import { AvatarList } from "../AvatarList";
 import {useState} from "react";
 import './index.css'
+import { useDispatch, useSelector } from "react-redux";
+import {RootState} from "../../rootReducer";
+import {setAvatar} from './avatarSelectorSlice';
 
 const FormContainer = styled.div`
   margin: 40px; 0;
@@ -19,7 +22,8 @@ const FormContainer = styled.div`
 
 const AvatarSelector: React.FC = () => {
   const [shouldShowList, setShouldShowList] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(IconNames.SPIDER_MAN);
+  const dispatch = useDispatch();
+  const {selectedAvatar} = useSelector((state: RootState) => state.avatarSelector);
 
   const handler = (event: any) => {
     console.log('*** event ***', event);
@@ -32,7 +36,8 @@ const AvatarSelector: React.FC = () => {
 
   const selectAvatarHandler = (event: any) => {
     const avatar = event.target.id;
-    setSelectedAvatar(avatar);
+    console.log('handler', avatar);
+    dispatch(setAvatar({selectedAvatar: avatar}));
   };
 
   return (
