@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Name} from "../Name";
+import {Name} from "../UserName";
 import styled from '@emotion/styled/macro';
 import {AppBar, Container, Paper, Slide} from "@material-ui/core";
 import {IconNames} from "../Icon";
@@ -30,23 +30,25 @@ const AvatarSelector: React.FC = () => {
     setShouldShowList(!shouldShowList);
   };
 
-  const onBlurHandler = (event: any) => {
-    setShouldShowList(false);
+  const hideList = () => setShouldShowList(false);
+
+  const onBlurHandler = (event?: any) => {
+    hideList();
   };
 
   const selectAvatarHandler = (event: any) => {
     const avatar = event.target.id;
-    console.log('handler', avatar);
     dispatch(setAvatar({selectedAvatar: avatar}));
+    hideList();
   };
 
   return (
     <>
-     <Container onClick={handler}>
+     <Container >
        <FormContainer>
          <AppBar classes={{root: 'avatar-container'}} color={'secondary'}>
-           <Avatar onBlur={onBlurHandler} name={selectedAvatar} />
-           <Name name={'dan'} />
+           <Avatar onClick={handler} onBlur={onBlurHandler} name={selectedAvatar} />
+           <Name />
          </AppBar>
          <Slide direction={'down'} in={shouldShowList}>
            <Paper elevation={0} classes={{root: 'avatar-selection-list'}}>

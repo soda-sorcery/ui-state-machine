@@ -6,7 +6,7 @@ export interface AvatarState {
 }
 
 const initialState: AvatarState = {
-  selectedAvatar: IconNames.THE_THING
+  selectedAvatar: IconNames.SPIDER_MAN,
 };
 
 const avatarSelectorSlice = createSlice({
@@ -15,7 +15,6 @@ const avatarSelectorSlice = createSlice({
   reducers: {
     setAvatar(state, action: PayloadAction<AvatarState>) {
       const {selectedAvatar} = action.payload;
-      console.log('reducer', selectedAvatar);
       state.selectedAvatar = selectedAvatar;
     },
   }

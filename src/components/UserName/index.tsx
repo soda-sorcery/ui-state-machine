@@ -3,24 +3,25 @@ import {TextField} from "@material-ui/core";
 import {useState} from "react";
 import { css, jsx } from '@emotion/core';
 import { Typography } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import './index.css'
+import {RootState} from "../../rootReducer";
+import { setUserName } from './userNameSlice';
 /** @jsx jsx */
 
-interface NameProps {
-    name: string;
-}
 
-const Name: React.FC<NameProps> = ({name}) => {
+
+const Name: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
-    const [formName, setFormName] = useState(name);
-
+    const formName = useSelector((state: RootState) => state.userName.name);
+    const dispatch = useDispatch();
     const clickHandler = (event: any) => {
       setIsClicked(!isClicked);
     };
 
     const updateName = (event: any) => {
       const {value} = event.target;
-      setFormName(value);
+      dispatch(setUserName({name: value}));
     };
 
     return (
