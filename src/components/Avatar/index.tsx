@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Icon, IconNames} from "../Icon";
-import {css, jsx} from "@emotion/core";
-/** @jsx jsx */
+import styled from '@emotion/styled/macro';
 
 interface AvatarProps {
     name: IconNames
@@ -9,12 +8,18 @@ interface AvatarProps {
     onBlur?: (event: any) => void;
 }
 
+const AvatarIconContainer = styled.article`
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+`;
+
 const Avatar: React.FC<AvatarProps> = ({name, onClick, onBlur}) => {
 
     return (
-     <article onBlur={onBlur} onClick={onClick} id={name} css={css`cursor: pointer; background-color: #fff; border-radius: 50%;`}>
+     <AvatarIconContainer onBlur={onBlur} onClick={onClick} id={name}>
          <Icon name={name} />
-     </article>
+     </AvatarIconContainer>
     )
 };
 

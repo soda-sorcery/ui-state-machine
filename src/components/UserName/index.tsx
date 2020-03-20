@@ -1,17 +1,29 @@
 import * as React from 'react';
 import {TextField} from "@material-ui/core";
 import {useState} from "react";
-import { css, jsx } from '@emotion/core';
 import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
 import {RootState} from "../../rootReducer";
 import { setUserName } from './userNameSlice';
-/** @jsx jsx */
+import styled from '@emotion/styled/macro';
 
 
+const UserNameContainer = styled.div`
+  margin-left: 20px;
+`;
 
-const Name: React.FC = () => {
+const StaticName = styled.div`
+  margin-top: 37px; 
+  cursor: pointer;
+`;
+
+const FormName = styled.div`
+  margin-top: 18px;
+`;
+
+
+const UserName: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
     const formName = useSelector((state: RootState) => state.userName.name);
     const dispatch = useDispatch();
@@ -25,20 +37,23 @@ const Name: React.FC = () => {
     };
 
     return (
-      <div css={css`
-        margin-left: 20px;
-      `}>
+      <UserNameContainer>
         {!isClicked &&
-          <Typography css={css`margin-top: 37px; cursor: pointer;`} variant={"h4"}>
-              <span onClick={clickHandler}>{formName}</span>
-          </Typography>
+          <StaticName>
+              <Typography variant={"h4"}>
+                  <span id={'userName'} onClick={clickHandler}>{formName}</span>
+              </Typography>
+          </StaticName>
         }
         {isClicked &&
-          <TextField autoFocus css={css`margin-top: 18px;`} onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+          <FormName>
+              <TextField autoFocus onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+          </FormName>
+
         }
-      </div>
+      </UserNameContainer>
     )
 };
 
 
-export { Name };
+export { UserName };

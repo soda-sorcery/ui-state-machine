@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {Name} from "../UserName";
+import {UserName} from "../UserName";
 import styled from '@emotion/styled/macro';
 import {AppBar, Container, Paper, Slide} from "@material-ui/core";
-import {IconNames} from "../Icon";
 import {Avatar} from "../Avatar";
 import { AvatarList } from "../AvatarList";
 import {useState} from "react";
@@ -48,7 +47,7 @@ const AvatarSelector: React.FC = () => {
        <FormContainer>
          <AppBar classes={{root: 'avatar-container'}} color={'secondary'}>
            <Avatar onClick={handler} onBlur={onBlurHandler} name={selectedAvatar} />
-           <Name />
+           <UserName />
          </AppBar>
          <Slide direction={'down'} in={shouldShowList}>
            <Paper elevation={0} classes={{root: 'avatar-selection-list'}}>

@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const userNameSlice = createSlice({
-  name: 'name',
+  name: 'userName',
   initialState,
   reducers: {
     setUserName(state, action: PayloadAction<NameState>) {
