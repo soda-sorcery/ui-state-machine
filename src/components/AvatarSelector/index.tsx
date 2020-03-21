@@ -8,7 +8,7 @@ import {useState} from "react";
 import './index.css'
 import { useDispatch, useSelector } from "react-redux";
 import {RootState} from "../../rootReducer";
-import {AvatarState, transitionActiveForm, transitionUpdateForm} from './avatarSelectorSlice';
+import {AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm} from './avatarSelectorSlice';
 
 const FormContainer = styled.div`
   margin: 40px; 0;
@@ -29,7 +29,7 @@ const AvatarSelector: React.FC = () => {
     dispatch(transitionActiveForm({shouldShowList: !shouldShowList} as AvatarState))
   };
 
-  const hideList = () => dispatch(transitionActiveForm({shouldShowList: false} as AvatarState));
+  const hideList = () => dispatch(transitionInActiveForm());
 
   const onBlurHandler = (event?: any) => {
     hideList();

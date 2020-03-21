@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
 import {RootState} from "../../rootReducer";
+import {AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm} from '../AvatarSelector/avatarSelectorSlice';
 import { setUserName } from './userNameSlice';
 import styled from '@emotion/styled/macro';
 
@@ -25,29 +26,34 @@ const FormName = styled.div`
 
 const UserName: React.FC = () => {
     const [isClicked, setIsClicked] = useState(false);
-    const formName = useSelector((state: RootState) => state.userName.name);
+    const formName = useSelector((state: RootState) => state.avatarSelector.userName);
+    const { shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
     const dispatch = useDispatch();
     const clickHandler = (event: any) => {
-      setIsClicked(!isClicked);
+      dispatch(transitionActiveForm({shouldEditUsername: !shouldEditUsername} as AvatarState))
+    };
+
+    const blurHandler = (event: any) => {
+      dispatch(transitionInActiveForm())
     };
 
     const updateName = (event: any) => {
       const {value} = event.target;
-      dispatch(setUserName({name: value}));
+      dispatch(transitionUpdateForm({userName: value} as AvatarState));
     };
 
     return (
       <UserNameContainer>
-        {!isClicked &&
+        {!shouldEditUsername &&
           <StaticName>
               <Typography variant={"h4"}>
                   <span id={'userName'} onClick={clickHandler}>{formName}</span>
               </Typography>
           </StaticName>
         }
-        {isClicked &&
+        {shouldEditUsername &&
           <FormName>
-              <TextField autoFocus onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={formName} label={'Name'} />
           </FormName>
 
         }
