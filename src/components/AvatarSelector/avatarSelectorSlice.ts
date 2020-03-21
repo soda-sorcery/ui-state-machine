@@ -3,23 +3,35 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface AvatarState {
   selectedAvatar: IconNames,
+  shouldShowList: boolean;
+  userName: string;
 }
 
 const initialState: AvatarState = {
   selectedAvatar: IconNames.SPIDER_MAN,
+  shouldShowList: false,
+  userName: 'dandalf the dev',
 };
 
 const avatarSelectorSlice = createSlice({
-  name: 'avatarSelector',
+  name: 'avatarSelector.activeForm',
   initialState,
   reducers: {
-    setAvatar(state, action: PayloadAction<AvatarState>) {
-      const {selectedAvatar} = action.payload;
-      state.selectedAvatar = selectedAvatar;
+    transitionActiveForm(state, action: PayloadAction<AvatarState>) {
+      return state = {
+        ...state,
+        ...action.payload,
+      }
+    },
+    transitionUpdateForm(state, action: PayloadAction<AvatarState>) {
+      return state = {
+        ...state,
+        ...action.payload,
+      }
     },
   }
 });
 
-export const { setAvatar } = avatarSelectorSlice.actions;
+export const { transitionActiveForm, transitionUpdateForm } = avatarSelectorSlice.actions;
 
 export default avatarSelectorSlice.reducer;
