@@ -24,7 +24,6 @@ const FormName = styled.div`
 
 
 const UserName: React.FC = () => {
-    const [isClicked, setIsClicked] = useState(false);
     const formName = useSelector((state: RootState) => state.avatarSelector.userName);
     const { shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
     const dispatch = useDispatch();
@@ -54,7 +53,6 @@ const UserName: React.FC = () => {
           <FormName>
               <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={formName} label={'Name'} />
           </FormName>
-
         }
       </UserNameContainer>
     )

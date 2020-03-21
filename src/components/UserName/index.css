@@ -18,9 +18,6 @@ div.MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: 2px solid #fff;
 }
 
-/*div.MuiInput-underline:hover{*/
-/*    border-bottom: 2px solid #fff;*/
-/*}*/
 
 div.MuiInput-underline:before{
     border-bottom: 1px solid #fff;

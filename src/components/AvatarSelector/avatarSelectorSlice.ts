@@ -6,6 +6,7 @@ export interface AvatarState {
   shouldShowList: boolean;
   userName: string;
   shouldEditUsername: boolean;
+  isLoading: boolean;
 }
 
 const initialState: AvatarState = {
@@ -13,6 +14,7 @@ const initialState: AvatarState = {
   shouldShowList: false,
   userName: 'dandalf the dev',
   shouldEditUsername: false,
+  isLoading: true,
 };
 
 const avatarSelectorSlice = createSlice({
@@ -30,7 +32,11 @@ const avatarSelectorSlice = createSlice({
         ...state,
         shouldEditUsername: false,
         shouldShowList: false,
+        isLoading: false,
       }
+    },
+    transitionLoading(state) {
+      state.isLoading = true
     },
     transitionUpdateForm(state, action: PayloadAction<AvatarState>) {
       return state = {
