@@ -31,7 +31,7 @@ const AvatarSelector: React.FC = () => {
   const {isLoading} = useSelector((state: RootState) => state.avatarSelector);
 
 
-  const handler = (event: any) => {
+  const hideShowAvatarListHandler = (event: any) => {
     dispatch(transitionActiveForm({shouldShowList: !shouldShowList} as AvatarState))
   };
 
@@ -62,7 +62,7 @@ const AvatarSelector: React.FC = () => {
      <Container >
        <FormContainer>
          <AppBar classes={{root: 'avatar-container'}} color={'secondary'}>
-           <Avatar onClick={handler} onBlur={onBlurHandler} name={selectedAvatar} />
+           <Avatar onClick={hideShowAvatarListHandler} onBlur={onBlurHandler} name={selectedAvatar} />
            <UserName />
          </AppBar>
          <Slide direction={'down'} in={shouldShowList}>
