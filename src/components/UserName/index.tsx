@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import './index.css'
 import {RootState} from "../../rootReducer";
 import {AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm} from '../AvatarSelector/avatarSelectorSlice';
-import { setUserName } from './userNameSlice';
 import styled from '@emotion/styled/macro';
 
 
