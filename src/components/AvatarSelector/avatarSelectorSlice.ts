@@ -1,0 +1,25 @@
+import {IconNames} from "../Icon";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
+export interface AvatarState {
+  selectedAvatar: IconNames,
+}
+
+const initialState: AvatarState = {
+  selectedAvatar: IconNames.SPIDER_MAN,
+};
+
+const avatarSelectorSlice = createSlice({
+  name: 'avatarSelector',
+  initialState,
+  reducers: {
+    setAvatar(state, action: PayloadAction<AvatarState>) {
+      const {selectedAvatar} = action.payload;
+      state.selectedAvatar = selectedAvatar;
+    },
+  }
+});
+
+export const { setAvatar } = avatarSelectorSlice.actions;
+
+export default avatarSelectorSlice.reducer;
