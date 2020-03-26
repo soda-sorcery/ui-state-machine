@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {UserName} from "../UserName";
+import { UserName } from "../UserName";
 import styled from '@emotion/styled/macro';
-import {AppBar, Container, Paper, Slide} from "@material-ui/core";
-import {Avatar} from "../Avatar";
+import { AppBar, Container, Paper, Slide } from "@material-ui/core";
+import { Avatar } from "../Avatar";
 import { AvatarList } from "../AvatarList";
 import './index.css'
 import { useDispatch, useSelector } from "react-redux";
-import {RootState} from "../../rootReducer";
-import {AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm} from './avatarSelectorSlice';
+import { RootState } from "../../rootReducer";
+import { AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm } from './avatarSelectorSlice';
 import { CircularProgress } from '@material-ui/core';
-import {useEffect, useState} from "react";
+import { useEffect } from "react";
 
 const FormContainer = styled.div`
   margin: 40px; 0;

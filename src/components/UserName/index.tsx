@@ -24,8 +24,7 @@ const FormName = styled.div`
 
 
 const UserName: React.FC = () => {
-    const formName = useSelector((state: RootState) => state.avatarSelector.userName);
-    const { shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
+    const { userName, shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
     const dispatch = useDispatch();
     const clickHandler = (event: any) => {
       dispatch(transitionActiveForm({shouldEditUsername: !shouldEditUsername} as AvatarState))
@@ -45,13 +44,13 @@ const UserName: React.FC = () => {
         {!shouldEditUsername &&
           <StaticName>
               <Typography variant={"h4"}>
-                  <span id={'userName'} onClick={clickHandler}>{formName}</span>
+                  <span id={'userName'} onClick={clickHandler}>{userName}</span>
               </Typography>
           </StaticName>
         }
         {shouldEditUsername &&
           <FormName>
-              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={formName} label={'Name'} />
+              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={userName} label={'Name'} />
           </FormName>
         }
       </UserNameContainer>
