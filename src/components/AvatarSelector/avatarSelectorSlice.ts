@@ -1,7 +1,14 @@
 import {IconNames} from "../Icon";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-export type StateNames = 'activeForm' | 'loading' | 'inactiveForm' | 'updateForm'
+
+
+export enum StateNames {
+  ActiveForm = 'activeForm',
+  Loading = 'loading',
+  InactiveForm = 'inactiveForm',
+  UpdateForm = 'updateForm',
+}
 
 export interface AvatarState {
   selectedAvatar: IconNames,
@@ -18,7 +25,7 @@ const initialState: AvatarState = {
   userName: 'dandalf the dev',
   shouldEditUsername: false,
   isLoading: true,
-  stateName: 'loading',
+  stateName: StateNames.Loading,
 };
 
 interface TypedMap<T> {
@@ -26,18 +33,18 @@ interface TypedMap<T> {
 }
 
 const stateTransitionMap: TypedMap<string[]> = {
-  loading: ['activeForm', 'inactiveForm', 'updateForm'],
-  activeForm: ['updateForm', 'inactiveForm'],
-  inactiveForm: ['activeForm'],
-  updateForm: ['inactiveForm'],
+  loading: [StateNames.ActiveForm, StateNames.InactiveForm, StateNames.UpdateForm],
+  activeForm: [StateNames.InactiveForm, StateNames.UpdateForm, StateNames.ActiveForm],
+  inactiveForm: [StateNames.ActiveForm],
+  updateForm: [StateNames.InactiveForm, StateNames.ActiveForm, StateNames.UpdateForm],
 };
 
-function isAllowedTransition(currentState: string, transitionState: string) {
+export function isAllowedTransition(currentState: string, transitionState: string) {
   const stateMap = stateTransitionMap[currentState];
   return stateMap.includes(transitionState);
 }
 
-function determineState(currentState: AvatarState, newState: AvatarState): AvatarState {
+export function determineState(currentState: AvatarState, newState: AvatarState): AvatarState {
   if(!isAllowedTransition(currentState.stateName, newState.stateName)) {
     return currentState;
   }
@@ -53,7 +60,7 @@ const avatarSelectorSlice = createSlice({
       return determineState(state, {
         ...state,
         ...action.payload,
-        stateName: 'activeForm',
+        stateName: StateNames.ActiveForm,
       });
     },
     transitionInActiveForm(state) {
@@ -62,21 +69,21 @@ const avatarSelectorSlice = createSlice({
         shouldEditUsername: false,
         shouldShowList: false,
         isLoading: false,
-        stateName: 'inactiveForm',
+        stateName: StateNames.InactiveForm,
       })
     },
     transitionLoading(state) {
       return determineState(state, {
         ...state,
         isLoading: true,
-        stateName: 'loading',
+        stateName: StateNames.Loading,
       });
     },
     transitionUpdateForm(state, action: PayloadAction<AvatarState>) {
       return determineState(state, {
         ...state,
         ...action.payload,
-        stateName: 'updateForm',
+        stateName: StateNames.UpdateForm,
       })
     },
   }

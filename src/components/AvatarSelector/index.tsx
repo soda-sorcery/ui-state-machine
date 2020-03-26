@@ -4,12 +4,12 @@ import styled from '@emotion/styled/macro';
 import { AppBar, Container, Paper, Slide } from "@material-ui/core";
 import { Avatar } from "../Avatar";
 import { AvatarList } from "../AvatarList";
-import './index.css'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../rootReducer";
 import { AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm } from './avatarSelectorSlice';
 import { CircularProgress } from '@material-ui/core';
 import { useEffect } from "react";
+import './index.css'
 
 const FormContainer = styled.div`
   margin: 40px; 0;
@@ -50,7 +50,7 @@ const AvatarSelector: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(transitionInActiveForm());
-    }, 3000);
+    }, 2300);
     return () => clearTimeout(timeout);
   }, []);
 
