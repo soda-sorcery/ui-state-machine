@@ -1,8 +1,6 @@
 import {IconNames} from "../Icon";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-
-
 export enum StateNames {
   ActiveForm = 'activeForm',
   Loading = 'loading',
@@ -28,20 +26,31 @@ const initialState: AvatarState = {
   stateName: StateNames.Loading,
 };
 
-interface TypedMap<T> {
-  [key: string]: T
+interface TransitionMap {
+  transitionState: string[];
+}
+interface StateMap {
+  [key: string]: TransitionMap;
 }
 
-const stateTransitionMap: TypedMap<string[]> = {
-  loading: [StateNames.ActiveForm, StateNames.InactiveForm, StateNames.UpdateForm],
-  activeForm: [StateNames.InactiveForm, StateNames.UpdateForm, StateNames.ActiveForm],
-  inactiveForm: [StateNames.ActiveForm],
-  updateForm: [StateNames.InactiveForm, StateNames.ActiveForm, StateNames.UpdateForm],
+const stateTransitionMap: StateMap = {
+  loading: {
+    transitionState: [StateNames.InactiveForm],
+  },
+  activeForm: {
+    transitionState: [StateNames.InactiveForm, StateNames.UpdateForm, StateNames.ActiveForm],
+  },
+  inactiveForm: {
+    transitionState: [StateNames.ActiveForm],
+  },
+  updateForm: {
+    transitionState: [StateNames.InactiveForm, StateNames.ActiveForm, StateNames.UpdateForm],
+  }
 };
 
 export function isAllowedTransition(currentState: string, transitionState: string) {
   const stateMap = stateTransitionMap[currentState];
-  return stateMap.includes(transitionState);
+  return stateMap.transitionState.includes(transitionState);
 }
 
 export function determineState(currentState: AvatarState, newState: AvatarState): AvatarState {
