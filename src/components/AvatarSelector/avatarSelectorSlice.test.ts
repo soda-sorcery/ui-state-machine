@@ -1,14 +1,14 @@
-import {AvatarState, determineState, isAllowedTransition, StateNames} from "./avatarSelectorSlice";
+import {AvatarState, guardTransition, isTransitionAllowed, StateNames} from "./avatarSelectorSlice";
 
 describe('avatar selector slice', () => {
   describe('isAllowedTransition', () => {
       it('returns true if current state can transition to desired state', () => {
-          const canTransition = isAllowedTransition(StateNames.ActiveForm, StateNames.UpdateForm);
+          const canTransition = isTransitionAllowed(StateNames.ActiveForm, StateNames.UpdateForm);
           expect(canTransition).toBeTruthy();
       });
 
       it('returns false if current state cannot transition to desired state', () => {
-        const canTransition = isAllowedTransition(StateNames.UpdateForm, StateNames.Loading);
+        const canTransition = isTransitionAllowed(StateNames.UpdateForm, StateNames.Loading);
         expect(canTransition).toBeFalsy();
       });
   });
@@ -22,7 +22,7 @@ describe('avatar selector slice', () => {
         stateName: StateNames.InactiveForm,
       } as AvatarState;
 
-      const newState = determineState(state, transitionState);
+      const newState = guardTransition(state, transitionState);
       expect(newState.stateName).toBe(StateNames.InactiveForm);
     });
 
@@ -34,7 +34,7 @@ describe('avatar selector slice', () => {
         stateName: StateNames.UpdateForm,
       } as AvatarState;
 
-      const newState = determineState(state, transitionState);
+      const newState = guardTransition(state, transitionState);
       expect(newState.stateName).toBe(StateNames.InactiveForm);
     });
   });

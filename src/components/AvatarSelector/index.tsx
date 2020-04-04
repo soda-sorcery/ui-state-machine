@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UserName } from "../UserName";
+import { Username } from "../UserName";
 import styled from '@emotion/styled/macro';
 import { AppBar, Container, Paper, Slide } from "@material-ui/core";
 import { Avatar } from "../Avatar";
@@ -63,7 +63,7 @@ const AvatarSelector: React.FC = () => {
        <FormContainer>
          <AppBar classes={{root: 'avatar-container'}} color={'secondary'}>
            <Avatar onClick={hideShowAvatarListHandler} onBlur={onBlurHandler} name={selectedAvatar} />
-           <UserName />
+           <Username />
          </AppBar>
          <Slide direction={'down'} in={shouldShowList}>
            <Paper elevation={0} classes={{root: 'avatar-selection-list'}}>

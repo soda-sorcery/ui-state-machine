@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {TextField} from "@material-ui/core";
-import {useState} from "react";
 import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
@@ -23,8 +22,8 @@ const FormName = styled.div`
 `;
 
 
-const UserName: React.FC = () => {
-    const { userName, shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
+const Username: React.FC = () => {
+    const { username, shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
     const dispatch = useDispatch();
     const clickHandler = (event: any) => {
       dispatch(transitionActiveForm({shouldEditUsername: !shouldEditUsername} as AvatarState))
@@ -36,7 +35,7 @@ const UserName: React.FC = () => {
 
     const updateName = (event: any) => {
       const {value} = event.target;
-      dispatch(transitionUpdateForm({userName: value} as AvatarState));
+      dispatch(transitionUpdateForm({username: value} as AvatarState));
     };
 
     return (
@@ -44,13 +43,13 @@ const UserName: React.FC = () => {
         {!shouldEditUsername &&
           <StaticName>
               <Typography variant={"h4"}>
-                  <span id={'userName'} onClick={clickHandler}>{userName}</span>
+                  <span id={'userName'} onClick={clickHandler}>{username}</span>
               </Typography>
           </StaticName>
         }
         {shouldEditUsername &&
           <FormName>
-              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={userName} label={'Name'} />
+              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={username} label={'Name'} />
           </FormName>
         }
       </UserNameContainer>
@@ -58,4 +57,4 @@ const UserName: React.FC = () => {
 };
 
 
-export { UserName };
+export { Username };

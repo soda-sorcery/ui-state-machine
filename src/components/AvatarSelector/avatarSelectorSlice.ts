@@ -11,7 +11,7 @@ export enum StateNames {
 export interface AvatarState {
   selectedAvatar: IconNames,
   shouldShowList: boolean;
-  userName: string;
+  username: string;
   shouldEditUsername: boolean;
   isLoading: boolean;
   stateName: StateNames;
@@ -20,7 +20,7 @@ export interface AvatarState {
 const initialState: AvatarState = {
   selectedAvatar: IconNames.SPIDER_MAN,
   shouldShowList: false,
-  userName: 'dandalf the dev',
+  username: 'dandalf the dev',
   shouldEditUsername: false,
   isLoading: true,
   stateName: StateNames.Loading,
@@ -48,13 +48,13 @@ const stateTransitionMap: StateMap = {
   }
 };
 
-export function isAllowedTransition(currentState: string, transitionState: string) {
+export function isTransitionAllowed(currentState: string, transitionState: string) {
   const stateMap = stateTransitionMap[currentState];
   return stateMap.transitionState.includes(transitionState);
 }
 
-export function determineState(currentState: AvatarState, newState: AvatarState): AvatarState {
-  if(!isAllowedTransition(currentState.stateName, newState.stateName)) {
+export function guardTransition(currentState: AvatarState, newState: AvatarState): AvatarState {
+  if(!isTransitionAllowed(currentState.stateName, newState.stateName)) {
     return currentState;
   }
   return newState;
@@ -62,18 +62,18 @@ export function determineState(currentState: AvatarState, newState: AvatarState)
 
 
 const avatarSelectorSlice = createSlice({
-  name: 'avatarSelector',
+  name: 'avatarSelectorg',
   initialState,
   reducers: {
     transitionActiveForm(state, action: PayloadAction<AvatarState>) {
-      return determineState(state, {
+      return guardTransition(state, {
         ...state,
         ...action.payload,
         stateName: StateNames.ActiveForm,
       });
     },
     transitionInActiveForm(state) {
-      return determineState(state, {
+      return guardTransition(state, {
         ...state,
         shouldEditUsername: false,
         shouldShowList: false,
@@ -82,14 +82,14 @@ const avatarSelectorSlice = createSlice({
       })
     },
     transitionLoading(state) {
-      return determineState(state, {
+      return guardTransition(state, {
         ...state,
         isLoading: true,
         stateName: StateNames.Loading,
       });
     },
     transitionUpdateForm(state, action: PayloadAction<AvatarState>) {
-      return determineState(state, {
+      return guardTransition(state, {
         ...state,
         ...action.payload,
         stateName: StateNames.UpdateForm,
