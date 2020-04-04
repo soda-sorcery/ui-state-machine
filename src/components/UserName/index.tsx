@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {TextField} from "@material-ui/core";
-import {useState} from "react";
 import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
 import {RootState} from "../../rootReducer";
-import { setUserName } from './userNameSlice';
+import {AvatarState, transitionActiveForm, transitionUpdateForm, transitionInActiveForm} from '../AvatarSelector/avatarSelectorSlice';
 import styled from '@emotion/styled/macro';
 
 
@@ -23,37 +22,39 @@ const FormName = styled.div`
 `;
 
 
-const UserName: React.FC = () => {
-    const [isClicked, setIsClicked] = useState(false);
-    const formName = useSelector((state: RootState) => state.userName.name);
+const Username: React.FC = () => {
+    const { username, shouldEditUsername } = useSelector((state: RootState) => state.avatarSelector);
     const dispatch = useDispatch();
     const clickHandler = (event: any) => {
-      setIsClicked(!isClicked);
+      dispatch(transitionActiveForm({shouldEditUsername: !shouldEditUsername} as AvatarState))
+    };
+
+    const blurHandler = (event: any) => {
+      dispatch(transitionInActiveForm())
     };
 
     const updateName = (event: any) => {
       const {value} = event.target;
-      dispatch(setUserName({name: value}));
+      dispatch(transitionUpdateForm({username: value} as AvatarState));
     };
 
     return (
       <UserNameContainer>
-        {!isClicked &&
+        {!shouldEditUsername &&
           <StaticName>
               <Typography variant={"h4"}>
-                  <span id={'userName'} onClick={clickHandler}>{formName}</span>
+                  <span id={'userName'} onClick={clickHandler}>{username}</span>
               </Typography>
           </StaticName>
         }
-        {isClicked &&
+        {shouldEditUsername &&
           <FormName>
-              <TextField autoFocus onChange={updateName} onBlur={clickHandler} value={formName} label={'Name'} />
+              <TextField autoFocus onChange={updateName} onBlur={blurHandler} value={username} label={'Name'} />
           </FormName>
-
         }
       </UserNameContainer>
     )
 };
 
 
-export { UserName };
+export { Username };
